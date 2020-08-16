@@ -12,7 +12,7 @@ templates.list = function(itemTemplate) {
         binding.model = [];
         binding.listContainer.innerHTML = '';
         for (var i = 0; i < array.length; ++i) {
-          var itemBinding = templates.listItem(itemTemplate);
+          var itemBinding = templates.listItemBinding(itemTemplate);
           itemBinding.setValue(array[i]);
           itemBinding.onDelete = binding.onItemDelete;
           binding.listContainer.appendChild(itemBinding.element);

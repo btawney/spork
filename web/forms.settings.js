@@ -111,6 +111,9 @@ forms.settings = {
       template: templates.settingRoster('defaults', [
         {name: 'defaultTransformationScheme',
          label: 'Default Transformation Scheme',
+         template: templates.text()},
+        {name: 'defaultPartOfSpeech',
+         label: 'Default Part of Speech',
          template: templates.text()}
       ])},
     {name: 'partsOfSpeech', label: 'Parts of Speech',

@@ -22,6 +22,7 @@ templates.polymorph = function(chooserName, formName, chooserTemplate, formTempl
         if (binding.formBinding != null) {
           result[formName] = binding.formBinding.getValue();
         }
+        return result;
       },
       setForm: function() {
         var chooser = binding.chooserBinding.getValue();
