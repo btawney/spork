@@ -1,0 +1,57 @@
+#!/bin/bash
+
+ETC=/etc/spork
+WEB=/var/www/html/spork
+
+cd `dirname $0`
+cd etc
+
+LIST=""
+for FILE in *
+do
+  if [ "$FILE" != "spork.conf" ]
+  then
+    if [ -e "$ETC/$FILE" ]
+    then
+      CKSUM1=`cksum $FILE | cut -d " " -f1`
+      CKSUM2=`cksum $ETC/$FILE | cut -d " " -f1`
+
+      if [ "$CKSUM1" != "$CKSUM2" ]
+      then
+        LIST="$LIST $FILE"
+      fi
+    else
+      LIST="$LIST $FILE"
+    fi
+  fi
+done
+
+for FILE in $LIST
+do
+  echo cp $FILE $ETC
+done
+
+cd ../web
+
+LIST=""
+for FILE in *
+do
+  if [ -e "$WEB/$FILE" ]
+  then
+    CKSUM1=`cksum $FILE | cut -d " " -f1`
+    CKSUM2=`cksum $WEB/$FILE | cut -d " " -f1`
+
+    if [ "$CKSUM1" != "$CKSUM2" ]
+    then
+      LIST="$LIST $FILE"
+    fi
+  else
+    LIST="$LIST $FILE"
+  fi
+done
+
+for FILE in $LIST
+do
+  echo cp $FILE $WEB
+done
+
