@@ -42,3 +42,17 @@ tableBinding.setValue([
 ]);
 document.body.appendChild(tableBinding.element);
 ```
+
+## Records
+
+A "record" is a JavaScript object returned by the `getValue()` method of a binding. These are serialized using JSON and stored exactly as-is in the database, to be retrieved later and sent into the `setValue()` method. The only constraint enforced on records is that, once written to the database, they are assigned an attribute called "key" that will uniquely identify them. Keys are assigned randomly in order to make it relatively difficult to guess them.
+
+When a record is revised, the old version of the record is not overwritten. Instead the data layer creates a new revision of the record and maintains it alongside the old one, with a date/time stamp to indicate when the new version was written. Deletes are also treated as a revision to a record.
+
+## Collections
+
+A "collection" is an unordered set records. There is nothing in the data layer that enforces a similarity of structure on records in a collection. That is all handled in the user interface. Collections also have a key value that uniquely identifies them.
+
+## Apps
+
+An "app" is a universe of collections. All of the data for an app is loaded into browser memory when the app starts up. Writes back to the data layer happen asynchronously as the user changes the data, making user the user interface extremely quick to respond.
