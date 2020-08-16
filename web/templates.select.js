@@ -13,6 +13,9 @@ templates.select = function(keyValuePairs) {
         return binding.element.value;
       },
       onChange: function(evt) {
+      },
+      focus: function() {
+        binding.element.focus();
       }
     };
 
@@ -41,6 +44,9 @@ templates.selectFromTable = function(table, valueField, labelField) {
       },
       getValue: function() {
         return binding.element.value;
+      },
+      focus: function() {
+        binding.element.focus();
       }
     };
 

@@ -32,6 +32,11 @@ templates.list = function(itemTemplate) {
           r.push(binding.model[i].getValue());
         }
         return r;
+      },
+      focus: function() {
+        if (binding.model.length > 0 && ('focus' in binding.model[0])) {
+          binding.model[0].focus();
+        }
       }
     };
 
@@ -135,6 +140,8 @@ templates.listReadOnly = function(itemTemplate, delimiter, prefix, suffix) {
       },
       getValue: function() {
         return original;
+      },
+      focus: function() {
       }
     };
 

@@ -9,6 +9,9 @@ templates.text = function(inputModifier) {
       },
       getValue: function() {
         return binding.element.value;
+      },
+      focus: function() {
+        binding.element.focus();
       }
     };
 
@@ -25,7 +28,10 @@ templates.textWithLabel = function(label, inputModifier) {
     var binding = {
       element: document.createElement('span'),
       labelSpan: document.createElement('span'),
-      inner: templates.text(inputModifier)()
+      inner: templates.text(inputModifier)(),
+      focus: function() {
+        binding.inner.focus();
+      }
     };
     binding.setValue = binding.inner.setValue;
     binding.getValue = binding.inner.getValue;

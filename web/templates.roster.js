@@ -21,6 +21,12 @@ templates.roster = function(columns) {
           r[p] = binding.model[p].getValue();
         }
         return r;
+      },
+      focusElement: null,
+      focus: function() {
+        if (binding.focusElement != null && ('focus' in binding.focusElement)) {
+          binding.focusElement.focus();
+        }
       }
     };
 
@@ -29,6 +35,9 @@ templates.roster = function(columns) {
     for (var c = 0; c < columns.length; ++c) {
       var column = columns[c];
       var itemBinding = templates.rosterRowBinding(binding.element, column);
+      if (binding.focusElement == null) {
+        binding.focusElement = itemBinding;
+      }
       binding.model[column.name] = itemBinding;
     }
 
@@ -46,6 +55,11 @@ templates.rosterRowBinding = function(table, column) {
     },
     getValue: function() {
       return binding.model.getValue();
+    },
+    focus: function() {
+      if (binding.model != null && ('focus' in binding.model)) {
+        binding.model.focus();
+      }
     }
   };
 
@@ -54,7 +68,7 @@ templates.rosterRowBinding = function(table, column) {
   if ('template' in column && typeof(column.template) == 'function') {
     binding.model = column.template();
   } else {
-    binding.model = templates.tableCell();
+    binding.model = templates.text();
   }
 
   binding.element.insertCell().appendChild(binding.model.element);

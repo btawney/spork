@@ -16,6 +16,9 @@ templates.buttons = {
         },
         getValue: function() {
           return binding.savedValue;
+        },
+        focus: function() {
+          binding.element.focus();
         }
       };
 

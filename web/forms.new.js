@@ -13,10 +13,12 @@ forms.new = {
       forms.new.binding.model.saveCancelPanel.onSave = function(evt) {
         data.tables.lexicon.update(forms.new.binding.model.entry.getValue());
         forms.new.binding.model.entry.setValue(data.lexicon.newEntry());
+        forms.new.binding.focus();
       };
 
       forms.new.binding.model.saveCancelPanel.onCancel = function(evt) {
         forms.new.binding.model.entry.setValue(data.lexicon.newEntry());
+        forms.new.binding.focus();
       };
     }
     ui.clear();

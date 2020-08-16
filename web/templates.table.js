@@ -47,6 +47,11 @@ templates.table = function(columns) {
           r.push(binding.model[i].getValue());
         }
         return r;
+      },
+      focus: function() {
+        if (binding.model.length > 0 && ('focus' in binding.model[0])) {
+          binding.model[0].focus();
+        }
       }
     };
 
@@ -76,6 +81,8 @@ templates.tableRowBinding = function(table, columns, offset) {
     deleteButton: document.createElement('BUTTON'),
     model: {},
     setValue: function(row) {
+      // To do: reorganize this so the item bindings are created when the
+      // row binding is initialized, not on setValue()
       binding.model = {};
       for (var i = 0; i < columns.length; ++i) {
         var column = columns[i];
@@ -83,7 +90,11 @@ templates.tableRowBinding = function(table, columns, offset) {
         if ('template' in column && typeof(column.template) == 'function') {
           var itemBinding = column.template();
         } else {
-          var itemBinding = templates.tableCellBinding();
+          var itemBinding = templates.text();
+        }
+
+        if (binding.focusElement == null) {
+          binding.focusElement = itemBinding;
         }
 
         binding.model[column.name] = itemBinding;
@@ -107,6 +118,12 @@ templates.tableRowBinding = function(table, columns, offset) {
       return r;
     },
     onDelete: function(b) {
+    },
+    focusElement: null,
+    focus: function() {
+      if (binding.focusElement != null && ('focus' in binding.focusElement)) {
+        binding.focusElement.focus();
+      }
     }
   };
 
@@ -118,17 +135,3 @@ templates.tableRowBinding = function(table, columns, offset) {
   return binding;
 };
 
-templates.tableCellBinding = function() {
-  var binding = {
-    type: 'tableCell',
-    element: document.createElement('INPUT'),
-    setValue: function(v) {
-      binding.element.value = v;
-    },
-    getValue: function() {
-      return binding.element.value;
-    }
-  };
-
-  return binding;
-};

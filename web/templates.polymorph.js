@@ -38,6 +38,11 @@ templates.polymorph = function(chooserName, formName, chooserTemplate, formTempl
         } else {
           binding.formBinding = null;
         }
+      },
+      focus: function() {
+        if (binding.formBinding != null && ('focus' in binding.formBinding)) {
+          binding.formBinding.focus();
+        }
       }
     };
 
