@@ -14,19 +14,21 @@
   $db = new Db('dev');
   $db->setString('appExternalId', $appExternalId);
 
+  $appName = $db->queryScalar(
+    'SELECT app.name'
+    . ' FROM app'
+    . ' WHERE app.externalId = @appExternalId');
+
+  print "\"app.name\":\"$appName\"";
+
   $collections = $db->queryAssociativeArray(
     'SELECT c.externalId, c.name'
     . ' FROM app a'
     . ' JOIN collection c ON c.appId = a.id'
     . ' WHERE a.externalId = @appExternalId');
 
-  $first = true;
   foreach ($collections as $id => $name) {
-    if ($first) {
-      $first = false;
-    } else {
-      print ",\n";
-    }
+    print ",\n";
 
     print "\"$name\":{\"key\":\"$id\",\"data\":[";
     $db->setString('collectionExternalId', $id);

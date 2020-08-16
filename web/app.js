@@ -1,6 +1,7 @@
 // app.js
 
 var app = {
+  name: 'Spork',
   key: '',
   initialize: function() {
     if (window.location.search.length > 0) {

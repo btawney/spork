@@ -6,7 +6,7 @@
     var $connection;
 
     function __construct($environment) {
-      $config = parse_ini_file('/etc/spork.conf', true);
+      $config = parse_ini_file('/etc/spork/spork.conf', true);
 
       if (isset($config[$environment])) {
         $ec = $config[$environment];

@@ -36,6 +36,8 @@ ui = {
     ui.contentArea.appendChild(element);
   },
   initialize: function() {
+    document.title = app.name;
+
     ui.menuBar = document.createElement('DIV');
     ui.menuBar.style.padding = '10px';
     ui.menuBar.style.backgroundColor = 'Aquamarine';
@@ -70,11 +72,13 @@ ui = {
 
     var bestLength = 0;
     var bestItem = null;
+    var bestLabel = '';
     for (var i = 0; i < ui.menuItems.length; ++i) {
       var item = ui.menuItems[i];
       if (target.startsWith(item.path) && item.path.length > bestLength) {
         bestItem = item;
         bestLength = item.path.length;
+        bestLabel = item.label;
       }
       item.element.style.backgroundColor = 'Aquamarine';
       item.isActive = false;
@@ -83,6 +87,7 @@ ui = {
     if (bestItem != null) {
       bestItem.isActive = true;
       bestItem.element.style.backgroundColor = 'orange';
+      document.title = app.name + ': ' + bestLabel;
     }
 
     bestLength = 0;

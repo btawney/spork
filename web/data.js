@@ -10,7 +10,11 @@ var data = {
     data.read(appKey,
       function(ts) {
         for (var tableName in ts) {
-          data.tables[tableName] = data.newTable(ts[tableName]);
+          if (tableName.startsWith('app.')) {
+            app[tableName.substring(4)] = ts[tableName];
+          } else {
+            data.tables[tableName] = data.newTable(ts[tableName]);
+          }
         }
         data.onLoad();
       },

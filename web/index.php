@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Sibe Lexicon</title>
+    <title>Spork</title>
     <meta charset="UTF-8">
     <?php
       require_once('script.php');
