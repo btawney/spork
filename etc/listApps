@@ -1,0 +1,21 @@
+#!/bin/bash
+
+while [ "$1" != "" ]
+do
+  case "$1" in
+    -n|--name)
+      shift
+      APPNAME="$1"
+      ;;
+    *)
+      echo "Unrecognized argument: $1"
+      echo "Usage:"
+      echo "  $0 [--name <name>]"
+      exit
+      ;;
+  esac
+  shift
+done
+
+php $0.php "$APPNAME"
+

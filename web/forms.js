@@ -1,0 +1,3 @@
+// forms.js
+
+var forms = {};
