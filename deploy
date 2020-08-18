@@ -28,7 +28,7 @@ done
 
 for FILE in $LIST
 do
-  echo cp $FILE $ETC
+  cp $FILE $ETC
 done
 
 cd ../web
@@ -52,6 +52,6 @@ done
 
 for FILE in $LIST
 do
-  echo cp $FILE $WEB
+  cp $FILE $WEB
 done
 
