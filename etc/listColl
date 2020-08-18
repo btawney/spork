@@ -1,0 +1,35 @@
+#!/bin/bash
+
+while [ "$1" != "" ]
+do
+  case "$1" in
+    -a|--app)
+      shift
+      APPID="$1"
+      ;;
+    -c|--coll)
+      shift
+      COLLID="$1"
+      ;;
+    *)
+      echo "Unrecognized argument: $1"
+      echo "Usage:"
+      echo "  $0 [--app <id>] [--name <name>]"
+      exit
+      ;;
+  esac
+  shift
+done
+
+if [ "$APPID" = "" ]
+then
+  read -p "App ID: " APPID
+fi
+
+if [ "$COLLID" = "" ]
+then
+  read -p "Collection ID: " COLLID
+fi
+
+php $0.php "$APPID" "$COLLID"
+
