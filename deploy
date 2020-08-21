@@ -2,9 +2,24 @@
 
 ETC=/etc/spork
 WEB=/var/www/html/spork
+PREVIEW=FALSE
+SCRIPTDIR=`dirname $0`
 
-cd `dirname $0`
-cd etc
+while [ "$1" != "" ]
+do
+  case "$1" in
+    -preview)
+      PREVIEW=TRUE
+      ;;
+    *)
+      echo Unrecognized parameter: $1
+      exit
+      ;;
+  esac
+  shift
+done
+
+cd $SCRIPTDIR/etc
 
 LIST=""
 for FILE in *
@@ -28,7 +43,12 @@ done
 
 for FILE in $LIST
 do
-  cp $FILE $ETC
+  if [ "$PREVIEW" = "TRUE" ]
+  then
+    echo cp $FILE $ETC
+  else
+    cp $FILE $ETC
+  fi
 done
 
 cd ../web
@@ -52,6 +72,11 @@ done
 
 for FILE in $LIST
 do
-  cp $FILE $WEB
+  if [ "$PREVIEW" = "TRUE" ]
+  then
+    echo cp $FILE $WEB
+  else
+    cp $FILE $WEB
+  fi
 done
 
